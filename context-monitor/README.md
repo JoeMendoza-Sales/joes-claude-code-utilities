@@ -6,7 +6,7 @@ No `jq`, no `bc`, plain bash. Tested on Windows (Git Bash) and macOS.
 
 ## What you get
 
-**Status bar meter**, always visible: `Context: 42.3% (85K/200K tokens) [OK]`
+**Status bar meter**, always visible: `Context: 42.3% (148K/350K tokens) [OK]`
 
 | Range | Color | Label | What to do |
 |---|---|---|---|
@@ -27,7 +27,7 @@ Two facts about Claude Code shape this:
 1. **Hooks aren't told how full the context is.** The status line is. So `statusline-command.sh` leaves the current percentage in a tiny per-session file in your temp folder every time it redraws.
 2. **Most hook output never reaches Claude.** Only a few events (`UserPromptSubmit` and `SessionStart` among them) add plain output to Claude's context. A `Stop` or `PreCompact` hook that just prints text goes to a debug log. So the alert runs on `UserPromptSubmit` and reads the saved percentage, and the reminder runs on `SessionStart` with the `compact` matcher.
 
-The meter measures against a 200K window by default. If you'd rather measure against a 1M window, set `CLAUDE_CTX_SIZE=1000000` in your environment.
+The meter measures against **350K** by default, not the full 1M window, and that number comes from data rather than a guess. Across a month of my own sessions, I corrected Claude no more often past 200K than below it, corrections didn't bunch up late in sessions, and Claude almost never forgot what it had been told earlier, up to about 350K. I compact before going further, so nothing beyond that has been tested. Set `CLAUDE_CTX_SIZE` to change it (e.g. `200000` to be cautious, `1000000` for the full window).
 
 ## Install
 

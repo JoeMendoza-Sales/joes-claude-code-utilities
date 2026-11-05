@@ -17,8 +17,10 @@ cache_creation=$(extract_num "cache_creation_input_tokens")
 cache_read=$(extract_num "cache_read_input_tokens")
 used_tokens=$(( input_tokens + cache_creation + cache_read ))
 
-# Window the meter measures against. Default 200K; override with CLAUDE_CTX_SIZE (e.g. 1000000).
-ctx_size="${CLAUDE_CTX_SIZE:-200000}"
+# Window the meter measures against. Default 350K: in a month of my own sessions, the rate of
+# corrections showed no decay up to ~350K, and nothing beyond that was tested. Override with
+# CLAUDE_CTX_SIZE (e.g. 200000 or 1000000).
+ctx_size="${CLAUDE_CTX_SIZE:-350000}"
 
 # Integer percentage (shell arithmetic, no bc)
 if [ "$used_tokens" -gt 0 ] 2>/dev/null; then
