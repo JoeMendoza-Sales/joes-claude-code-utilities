@@ -1,19 +1,27 @@
 #!/bin/bash
-# Context window monitor — fires on Stop hook
-# Checks usage % and injects reminders at 25/50/75/90% thresholds
-# Each threshold fires only once per session (tracked via state file)
+# Context alerts. Runs on the UserPromptSubmit hook, where plain stdout is added to Claude's context.
+# Hooks aren't told how full the context is, so this reads the percentage the status line saved
+# (statusline-command.sh writes it to $TEMP/claude-ctx-<session_id> every time it redraws).
+# 25/50/75 fire once per session; 90 repeats on every prompt until you compact.
+# Portable: no jq required.
 
 INPUT=$(cat)
-PCT=$(echo "$INPUT" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1 2>/dev/null)
 
-if [ -z "$PCT" ] || [ "$PCT" = "null" ] || [ "$PCT" = "0" ]; then exit 0; fi
+SESSION_ID=$(echo "$INPUT" | grep -o '"session_id"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*:[[:space:]]*"//;s/"$//')
+[ -z "$SESSION_ID" ] && exit 0
 
-SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // "unknown"' 2>/dev/null)
-STATE_FILE="/tmp/claude-context-monitor-${SESSION_ID}"
+TMPDIR="${TEMP:-${TMP:-/tmp}}"
+PCT_FILE="${TMPDIR}/claude-ctx-${SESSION_ID}"
+STATE_FILE="${TMPDIR}/claude-context-monitor-${SESSION_ID}"
+
+[ -f "$PCT_FILE" ] || exit 0
+PCT=$(tr -dc '0-9' < "$PCT_FILE")
+[ -z "$PCT" ] && exit 0
+
 FIRED=""
-if [ -f "$STATE_FILE" ]; then FIRED=$(cat "$STATE_FILE"); fi
+[ -f "$STATE_FILE" ] && FIRED=$(cat "$STATE_FILE")
 
-fire_threshold() {
+fire_once() {
   local level=$1 msg=$2
   if ! echo "$FIRED" | grep -q "^${level}$"; then
     echo "$msg"
@@ -22,11 +30,12 @@ fire_threshold() {
 }
 
 if [ "$PCT" -ge 90 ]; then
-  echo "CRITICAL: Context at ${PCT}%. Save findings to memory NOW, then run /compact immediately."
+  echo "CRITICAL: Context at ${PCT}%. Before anything else, save important findings and decisions to memory, then tell the user to run /compact (or /wrap and start fresh). Do not start new work until then."
 elif [ "$PCT" -ge 75 ]; then
-  fire_threshold 75 "WARNING: Context at ${PCT}%. Save key findings to memory. Plan to /compact soon."
+  fire_once 75 "WARNING: Context at ${PCT}%. Save key findings and decisions to memory now. Avoid large new operations; suggest /compact soon."
 elif [ "$PCT" -ge 50 ]; then
-  fire_threshold 50 "CONTEXT CHECK (${PCT}%): Halfway through. Save important discoveries to memory."
+  fire_once 50 "CONTEXT CHECK (${PCT}%): Halfway. Save any important discoveries or decisions to memory now."
 elif [ "$PCT" -ge 25 ]; then
-  fire_threshold 25 "CONTEXT CHECK (${PCT}%): Quarter mark. Save important findings to memory if needed."
+  fire_once 25 "CONTEXT CHECK (${PCT}%): Quarter mark. If you have findings worth keeping, save them to memory."
 fi
+exit 0

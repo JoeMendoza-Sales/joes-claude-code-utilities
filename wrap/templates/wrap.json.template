@@ -1,0 +1,48 @@
+{
+  "project": "CHANGE-ME-short-lowercase-id",
+  "display_name": "Change Me: Human Readable Project Name",
+
+  "notion": {
+    "enabled": false,
+    "database_id": null,
+    "page_title_format": "{project} Session — {date}",
+    "append_mode": true,
+    "entry_fields": {
+      "date": "Date",
+      "summary": "Summary",
+      "files_changed": "Files Changed",
+      "status": "Status"
+    }
+  },
+
+  "git": {
+    "enabled": true,
+    "repo_path": ".",
+    "commit_prefix": "session:",
+    "commit_format": "session: {date} — {summary}",
+    "auto_push": false,
+    "ask_before_push": true
+  },
+
+  "brain": {
+    "enabled": true,
+    "log_path": "brain/session-log.jsonl",
+    "entry_type": "session-log",
+    "tags": ["session"]
+  },
+
+  "changelog": {
+    "enabled": true,
+    "path": "CHANGELOG.md",
+    "format": "keep-a-changelog"
+  },
+
+  "privacy_filter": {
+    "enabled": false,
+    "strip": ["client_names", "person_names", "dollar_amounts", "contact_details"]
+  },
+
+  "fallback": {
+    "local_path": ".sessions"
+  }
+}

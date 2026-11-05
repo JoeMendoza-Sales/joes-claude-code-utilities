@@ -1,91 +1,90 @@
-# Context Window Monitor for Claude Code
+# Context Monitor
 
-Shows a live, color-coded context usage meter in your Claude Code status bar and alerts you at key thresholds so you never lose work to context overflow.
+A live, color-coded context meter in your Claude Code status bar, plus alerts that Claude itself sees as the conversation fills up, so it saves what matters before anything gets compressed.
 
-## What You Get
+No `jq`, no `bc`, plain bash. Tested on Windows (Git Bash) and macOS.
 
-**Status bar** — always-visible meter: `Context: 42.3% (85K/200K tokens) [OK]`
+## What you get
 
-**Color gradient** — changes as usage climbs:
+**Status bar meter**, always visible: `Context: 42.3% (85K/200K tokens) [OK]`
 
-| Range   | Color         | Label            | What to do                    |
-|---------|---------------|------------------|-------------------------------|
-| 0-25%   | Blue          | (none)           | Normal                        |
-| 25-50%  | Blue → Green  | OK               | Awareness                     |
-| 50-75%  | Yellow-Orange | MODERATE         | Be concise, use subagents     |
-| 75-90%  | Orange-Red    | HIGH — /compact  | Run `/compact` to reclaim space |
-| 90%+    | Deep Red      | WRAP NOW         | Stop — compact or start fresh |
+| Range | Color | Label | What to do |
+|---|---|---|---|
+| 0-25% | Blue | (none) | Normal |
+| 25-50% | Blue to green | OK | Awareness |
+| 50-75% | Yellow to orange | MODERATE | Be concise, hand long reading to subagents |
+| 75-90% | Orange to red | HIGH: /compact | Compact soon |
+| 90%+ | Red | WRAP NOW | Stop, save, compact or start fresh |
 
-**Threshold alerts** — one-time reminders injected at 25/50/75/90% so you can save important work before context gets compressed.
+**Alerts Claude can see** at 25%, 50% and 75% (once each per session), and at 90% on every message until you compact. Claude is told to save findings to memory before going further.
 
-**Pre-compact reminder** — before `/compact` runs, reminds you to save anything important.
+**A post-compact reminder.** Right after `/compact`, Claude is told the summary is lossy and to re-read its notes before trusting exact numbers or names.
 
-## Prerequisites
+## How it works (and why it's built this way)
 
-- `jq` and `bc` (both come with most Macs, or `brew install jq bc`)
+Two facts about Claude Code shape this:
+
+1. **Hooks aren't told how full the context is.** The status line is. So `statusline-command.sh` leaves the current percentage in a tiny per-session file in your temp folder every time it redraws.
+2. **Most hook output never reaches Claude.** Only a few events (`UserPromptSubmit` and `SessionStart` among them) add plain output to Claude's context. A `Stop` or `PreCompact` hook that just prints text goes to a debug log. So the alert runs on `UserPromptSubmit` and reads the saved percentage, and the reminder runs on `SessionStart` with the `compact` matcher.
+
+The meter measures against a 200K window by default. If you'd rather measure against a 1M window, set `CLAUDE_CTX_SIZE=1000000` in your environment.
 
 ## Install
 
-### 1. Copy files into place
+### 1. Copy the files
 
 ```bash
 cp statusline-command.sh ~/.claude/statusline-command.sh
 mkdir -p ~/.claude/scripts
-cp scripts/context-monitor.sh ~/.claude/scripts/context-monitor.sh
-cp scripts/pre-compact-memory.sh ~/.claude/scripts/pre-compact-memory.sh
+cp scripts/context-monitor.sh scripts/post-compact-reminder.sh ~/.claude/scripts/
 chmod +x ~/.claude/statusline-command.sh ~/.claude/scripts/*.sh
 ```
 
-### 2. Update settings.json
-
-Open (or create) `~/.claude/settings.json` and add/merge these keys:
+### 2. Merge this into `~/.claude/settings.json`
 
 ```json
 {
-  "hooks": {
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/scripts/context-monitor.sh"
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/scripts/pre-compact-memory.sh"
-          }
-        ]
-      }
-    ]
-  },
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "bash ~/.claude/scripts/context-monitor.sh" }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          { "type": "command", "command": "bash ~/.claude/scripts/post-compact-reminder.sh" }
+        ]
+      }
+    ]
   }
 }
 ```
 
-> **If you already have a `settings.json`**: merge the `hooks` and `statusLine` keys into your existing file — don't overwrite the whole thing.
+If you already have a `settings.json`, merge the `statusLine` and `hooks` keys into it rather than replacing the file. If you already have `SessionStart` or `UserPromptSubmit` hooks, add these entries alongside them.
 
-### 3. Restart Claude Code
+### 3. Start a new session
 
-Start a new session. You should see the context meter in the status bar right away.
+The meter shows up as soon as the first response comes back.
+
+## Upgrading from the earlier version
+
+The first version of this kit ran the alerts on a `Stop` hook and had a `PreCompact` reminder. Neither ever reached Claude, for the two reasons above. Remove `Stop` → `context-monitor.sh` and `PreCompact` → `pre-compact-memory.sh` from your settings, then follow the install steps.
 
 ## Files
 
 ```
-context-monitor-kit/
-├── README.md                        ← you are here
-├── statusline-command.sh            ← status bar script (→ ~/.claude/)
+context-monitor/
+├── README.md
+├── statusline-command.sh          → ~/.claude/  (meter; also saves the % for the alert)
 └── scripts/
-    ├── context-monitor.sh           ← threshold alerts (→ ~/.claude/scripts/)
-    └── pre-compact-memory.sh        ← pre-compact reminder (→ ~/.claude/scripts/)
+    ├── context-monitor.sh         → ~/.claude/scripts/  (UserPromptSubmit alerts)
+    └── post-compact-reminder.sh   → ~/.claude/scripts/  (SessionStart "compact" reminder)
 ```

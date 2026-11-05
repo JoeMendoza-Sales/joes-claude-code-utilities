@@ -1,0 +1,10 @@
+# Shell scripts MUST keep Unix line endings. If Windows checks them out with CRLF,
+# bash fails with errors like "$'\r': command not found" and the context tracker
+# silently stops working.
+*.sh text eol=lf
+
+# Config read by bash/node - same reasoning.
+*.json text eol=lf
+
+# Docs can be whatever the platform prefers.
+*.md text

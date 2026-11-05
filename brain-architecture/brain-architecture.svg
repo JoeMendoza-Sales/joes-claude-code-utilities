@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">How the brain compounds</title>
+  <desc id="desc">Raw experience passes through /learn into the brain. Skills use the brain to create work product. Results and corrections feed back through /learn. A session layer carries work between sessions.</desc>
+  <defs>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#1F2433" flood-opacity="0.07"/>
+    </filter>
+    <marker id="slate-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M2 2 L10 6 L2 10" fill="none" stroke="#5B6478" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="teal-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M2 2 L10 6 L2 10" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#F7F8FB"/>
+  <g font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="48" y="77" fill="#1F2433" font-size="44" font-weight="700">How the brain compounds</text>
+    <text x="50" y="120" fill="#5B6478" font-size="22">Every piece of work teaches the next one. Sensitive detail stops at the gate.</text>
+
+    <!-- Main flow cards -->
+    <rect x="40" y="174" width="250" height="536" rx="18" fill="#FFFFFF" stroke="#DCE9E7" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <rect x="40" y="174" width="250" height="7" rx="3.5" fill="#0D9488"/>
+    <text x="63" y="227" fill="#0D9488" font-size="28" font-weight="700">Raw experience</text>
+
+    <rect x="330" y="174" width="250" height="536" rx="18" fill="#FFFFFF" stroke="#DCE9E7" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <rect x="330" y="174" width="250" height="7" rx="3.5" fill="#0D9488"/>
+    <circle cx="365" cy="218" r="18" fill="#E7F6F3"/>
+    <g fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M357 210 H373 V222 H369 L365 226 L361 222 H357 Z"/>
+      <path d="M361 216 H369"/>
+    </g>
+    <text x="393" y="227" fill="#0D9488" font-size="28" font-weight="700">/learn</text>
+
+    <rect x="620" y="174" width="350" height="536" rx="18" fill="#FFFFFF" stroke="#DCDCF4" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <rect x="620" y="174" width="350" height="7" rx="3.5" fill="#4F46E5"/>
+    <circle cx="660" cy="222" r="22" fill="#ECEBFF"/>
+    <g fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="653" cy="216" r="3"/><circle cx="668" cy="213" r="3"/>
+      <circle cx="659" cy="230" r="3"/><circle cx="672" cy="229" r="3"/>
+      <path d="M656 215 L665 214 M654 219 L658 227 M667 216 L661 227 M662 230 L669 229"/>
+    </g>
+    <text x="697" y="232" fill="#4F46E5" font-size="30" font-weight="700">The brain</text>
+
+    <rect x="1010" y="174" width="270" height="536" rx="18" fill="#FFFFFF" stroke="#F1E3D2" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <rect x="1010" y="174" width="270" height="7" rx="3.5" fill="#D97706"/>
+    <text x="1034" y="227" fill="#D97706" font-size="28" font-weight="700">Skills</text>
+
+    <rect x="1320" y="174" width="240" height="536" rx="18" fill="#FFFFFF" stroke="#F1E3D2" stroke-width="1.8" filter="url(#card-shadow)"/>
+    <rect x="1320" y="174" width="240" height="7" rx="3.5" fill="#D97706"/>
+    <text x="1344" y="227" fill="#D97706" font-size="28" font-weight="700">Work product</text>
+
+    <!-- Arrows between cards -->
+    <g fill="none" stroke="#5B6478" stroke-width="2.5" stroke-linecap="round" marker-end="url(#slate-arrow)">
+      <path d="M299 446 H319"/>
+      <path d="M589 446 H609"/>
+      <path d="M979 446 H999"/>
+      <path d="M1289 446 H1309"/>
+    </g>
+
+    <!-- Raw experience -->
+    <g fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="80" cy="291" r="21" fill="#E7F6F3" stroke="none"/>
+      <path d="M71 284 H89 V297 H82 L77 301 V297 H71 Z"/>
+      <path d="M75 289 H85 M75 293 H82"/>
+      <circle cx="80" cy="395" r="21" fill="#E7F6F3" stroke="none"/>
+      <path d="M73 385 H87 V391 C87 397 84 400 80 400 C76 400 73 397 73 391 Z"/>
+      <path d="M73 388 H69 V392 C69 395 71 396 74 396 M87 388 H91 V392 C91 395 89 396 86 396 M80 400 V405 M74 405 H86"/>
+      <circle cx="80" cy="499" r="21" fill="#E7F6F3" stroke="none"/>
+      <path d="M80 488 C76 486 72 487 69 489 V505 C73 503 77 503 80 506 C83 503 87 503 91 505 V489 C88 487 84 486 80 488 Z"/>
+      <path d="M80 488 V506"/>
+      <circle cx="80" cy="603" r="21" fill="#E7F6F3" stroke="none"/>
+      <path d="M71 610 L75 609 L89 595 L85 591 L71 605 Z M83 593 L87 597 M71 610 L76 609"/>
+    </g>
+    <g fill="#1F2433" font-size="21" font-weight="500">
+      <text x="111" y="297">Calls and notes</text>
+      <text x="111" y="391"><tspan x="111">Deal outcomes</tspan><tspan x="111" dy="27">(won and lost)</tspan></text>
+      <text x="111" y="495"><tspan x="111">Frameworks and</tspan><tspan x="111" dy="27">playbooks</tspan></text>
+      <text x="111" y="599"><tspan x="111">Corrections I give</tspan><tspan x="111" dy="27">Claude</tspan></text>
+    </g>
+
+    <!-- /learn gate -->
+    <path d="M354 256 H556" stroke="#DCE9E7" stroke-width="1.6"/>
+    <g font-size="21">
+      <circle cx="361" cy="291" r="17" fill="#E7F6F3"/>
+      <text x="361" y="298" text-anchor="middle" fill="#0D9488" font-weight="700">1</text>
+      <text x="391" y="299" fill="#1F2433" font-size="23" font-weight="700">Anonymize</text>
+      <text x="354" y="333" fill="#5B6478"><tspan x="354">names become roles,</tspan><tspan x="354" dy="26">companies become</tspan><tspan x="354" dy="26">descriptors</tspan></text>
+      <circle cx="361" cy="427" r="17" fill="#E7F6F3"/>
+      <text x="361" y="434" text-anchor="middle" fill="#0D9488" font-weight="700">2</text>
+      <text x="391" y="435" fill="#1F2433" font-size="23" font-weight="700">Structure</text>
+      <text x="354" y="469" fill="#5B6478"><tspan x="354">context, what</tspan><tspan x="354" dy="26">happened, insight,</tspan><tspan x="354" dy="26">when to apply</tspan></text>
+      <circle cx="361" cy="563" r="17" fill="#E7F6F3"/>
+      <text x="361" y="570" text-anchor="middle" fill="#0D9488" font-weight="700">3</text>
+      <text x="391" y="571" fill="#1F2433" font-size="23" font-weight="700">Weight</text>
+      <text x="354" y="605" fill="#5B6478"><tspan x="354">tagged by source</tspan><tspan x="354" dy="26">and strength of</tspan><tspan x="354" dy="26">evidence</tspan></text>
+    </g>
+
+    <!-- Brain tiles -->
+    <g stroke="#DDDDF7" stroke-width="1.6">
+      <rect x="646" y="284" width="142" height="124" rx="14" fill="#F4F3FF"/>
+      <rect x="802" y="284" width="142" height="124" rx="14" fill="#F4F3FF"/>
+      <rect x="646" y="424" width="142" height="124" rx="14" fill="#F4F3FF"/>
+      <rect x="802" y="424" width="142" height="124" rx="14" fill="#F4F3FF"/>
+    </g>
+    <g fill="none" stroke="#4F46E5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="717" cy="327" r="13"/><path d="M717 319 V327 L723 332"/>
+      <circle cx="873" cy="324" r="4"/><circle cx="858" cy="339" r="4"/><circle cx="888" cy="339" r="4"/><path d="M870 327 L861 336 M876 327 L885 336"/>
+      <path d="M703 477 H731 V494 H703 Z M708 487 L714 492 L726 480"/>
+      <path d="M860 477 C866 474 870 475 873 478 C876 475 881 474 887 477 V495 C881 492 876 493 873 496 C870 493 865 492 860 495 Z M873 478 V496"/>
+    </g>
+    <g fill="#1F2433" font-size="22" font-weight="600" text-anchor="middle">
+      <text x="717" y="380">Insights</text>
+      <text x="873" y="380">Patterns</text>
+      <text x="717" y="520">Outcomes</text>
+      <text x="873" y="520">Frameworks</text>
+    </g>
+    <text x="795" y="615" text-anchor="middle" fill="#5B6478" font-size="20">Claude reads this first, every time</text>
+
+    <!-- Skills -->
+    <g fill="none" stroke="#D97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="1055" cy="288" r="21" fill="#FFF4E7" stroke="none"/>
+      <path d="M1045 288 L1052 295 L1065 281 M1047 277 H1063 V299 H1047 Z"/>
+      <circle cx="1055" cy="366" r="21" fill="#FFF4E7" stroke="none"/>
+      <circle cx="1052" cy="363" r="8"/><path d="M1058 369 L1066 377"/>
+      <circle cx="1055" cy="444" r="21" fill="#FFF4E7" stroke="none"/>
+      <circle cx="1055" cy="444" r="10"/><path d="M1055 444 L1061 437 L1058 447 Z"/>
+      <circle cx="1055" cy="522" r="21" fill="#FFF4E7" stroke="none"/>
+      <rect x="1045" y="514" width="20" height="16" rx="1"/><path d="M1045 519 H1065 M1050 526 H1055 M1059 526 H1061"/>
+      <circle cx="1055" cy="600" r="21" fill="#FFF4E7" stroke="none"/>
+      <rect x="1044" y="593" width="22" height="15" rx="2"/><path d="M1045 595 L1055 602 L1065 595"/>
+    </g>
+    <g fill="#1F2433" font-size="21" font-weight="500">
+      <text x="1087" y="294">Qualify a deal</text>
+      <text x="1087" y="359"><tspan x="1087">Research an</tspan><tspan x="1087" dy="26">account</tspan></text>
+      <text x="1087" y="450">Plan strategy</text>
+      <text x="1087" y="515"><tspan x="1087">Build decks</tspan><tspan x="1087" dy="26">and ROI</tspan></text>
+      <text x="1087" y="606">Draft follow-ups</text>
+    </g>
+
+    <!-- Work product -->
+    <circle cx="1440" cy="371" r="63" fill="#FFF4E7"/>
+    <g fill="none" stroke="#D97706" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1419 341 H1450 L1463 354 V401 H1419 Z"/>
+      <path d="M1450 341 V354 H1463 M1428 367 H1454 M1428 377 H1454 M1428 387 H1448"/>
+    </g>
+    <text x="1440" y="488" text-anchor="middle" fill="#1F2433" font-size="22" font-weight="500"><tspan x="1440">briefs, decks,</tspan><tspan x="1440" dy="30">emails, plans</tspan></text>
+
+    <!-- Feedback loop -->
+    <path d="M1440 711 V752 Q1440 770 1422 770 H473 Q455 770 455 752 V718" fill="none" stroke="#0D9488" stroke-width="2.6" stroke-dasharray="9 8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#teal-arrow)"/>
+    <rect x="592" y="748" width="410" height="43" rx="13" fill="#F7F8FB"/>
+    <text x="797" y="777" text-anchor="middle" fill="#0D9488" font-size="21" font-weight="600">Results and corrections feed back in</text>
+
+    <!-- Session layer -->
+    <rect x="40" y="825" width="1520" height="150" rx="18" fill="#EEF1F6" stroke="#E0E5EE" stroke-width="1.8"/>
+    <text x="65" y="867" fill="#1F2433" font-size="28" font-weight="700">Session layer</text>
+    <g fill="none" stroke="#5B6478" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="85" cy="923" r="22" fill="#FFFFFF" stroke="none"/>
+      <path d="M78 912 H91 V930 L85 925 L78 930 Z"/>
+      <circle cx="592" cy="923" r="22" fill="#FFFFFF" stroke="none"/>
+      <circle cx="586" cy="917" r="3"/><circle cx="598" cy="917" r="3"/><circle cx="592" cy="929" r="3"/><path d="M589 919 L591 926 M595 926 L597 919"/>
+      <circle cx="1090" cy="923" r="22" fill="#FFFFFF" stroke="none"/>
+      <path d="M1079 927 A12 12 0 0 1 1101 927 M1090 925 L1096 918 M1084 931 H1096"/>
+    </g>
+    <g fill="#1F2433" font-size="20" font-weight="500">
+      <text x="121" y="916"><tspan x="121">/wrap saves your place at the</tspan><tspan x="121" dy="27">end of every session</tspan></text>
+      <text x="627" y="916"><tspan x="627">Memory carries preferences</tspan><tspan x="627" dy="27">between sessions</tspan></text>
+      <text x="1125" y="916"><tspan x="1125">Context meter warns before</tspan><tspan x="1125" dy="27">the chat overflows</tspan></text>
+    </g>
+  </g>
+</svg>
